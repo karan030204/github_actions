@@ -21,10 +21,14 @@ jobs:
       run: go test -v ./...
 
 
+    - name: Build Binary
+      run: |
+        go build -o simplemath .
+
     - name: Upload Binary to S3
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
         AWS_DEFAULT_REGION: "eu-central-1"
       run: |
-        aws s3 cp ./simplemath s3://${{ secrets.TARGET_BUCKET }}/
+        aws s3 cp simplemath s3://${{ secrets.TARGET_BUCKET }}/
