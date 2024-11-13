@@ -44,3 +44,11 @@ jobs:
         aws_region: "ap-south-1"  # Make sure this matches your S3 bucket region
         aws_bucket: ${{ secrets.TARGET_BUCKET }}
         target: .  # Downloads to current directory
+    - name: ssh-scp-ssh-pipelines
+      uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
+      with:
+        host: 3.70.96.177
+        user: ec2-user
+        key: ${{ secrets.PRIVATE_KEY }}
+        scp: ./simplemath => /home/ec2-user/app/simplemath
+        last_ssh: chmod +x /home/ec2-user/app/simplemath/simplemath
